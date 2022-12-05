@@ -1,3 +1,3 @@
-import { app } from "../../server/routers/app";
+import { initApp } from '@/Server/app';
 
-export default app;
+export default initApp();

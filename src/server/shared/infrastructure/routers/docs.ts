@@ -1,9 +1,8 @@
 import { makeApi } from '@zodios/core';
-import { openApiBuilder } from '@zodios/openapi';
 import { serve, setup } from 'swagger-ui-express';
 import { z } from 'zod';
 
-import { FrontendFrameworksDef } from '@/src/common/api';
+import { OpenApiDocsGenerate } from '@/SharedServer/infrastructure/utils/OpenApiDocsGenerate';
 import { ctx } from '@/src/server/context';
 
 const DocsDef = makeApi([
@@ -16,19 +15,10 @@ const DocsDef = makeApi([
 	},
 ]);
 
-const openApiDocument = openApiBuilder({
-	title: 'Zodios api',
-	version: '1.0.0',
-	description: 'A simple API',
-})
-	.addServer({ url: '/api/v1', description: 'wallet api test' })
-	.addPublicApi([...FrontendFrameworksDef])
-	.build();
-
 export const docsRouter = ctx.router(DocsDef);
 
 docsRouter.get('/docs/swagger.json', (_, res) => {
-	return res.json(openApiDocument);
+	return res.json(OpenApiDocsGenerate());
 });
 
 docsRouter.use(

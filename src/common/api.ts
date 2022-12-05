@@ -1,12 +1,14 @@
-import { makeApi } from '@zodios/core';
 import { z } from 'zod';
+
+import { makeApiWithDocs } from '@/SharedServer/infrastructure/utils/endpointHelpers';
 
 const FrameworkSCHEMA = z.object({ data: z.string() });
 
-export const FrontendFrameworksDef = makeApi([
+export const FrontendFrameworksDef = makeApiWithDocs([
 	{
 		method: 'post',
 		path: '/frontend-frameworks',
+		status: 200,
 		response: FrameworkSCHEMA,
 		alias: 'createFramework',
 		description: 'create a new framework',

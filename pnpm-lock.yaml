@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@prisma/client': ^4.7.1
   '@tanstack/react-query': 4.18.0
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/react': 13.4.0
@@ -10,11 +11,13 @@ specifiers:
   '@types/react-dom': 18.0.9
   '@types/swagger-ui-express': 4.1.3
   '@types/testing-library__jest-dom': 5.14.5
+  '@types/uuid': ^9.0.0
   '@zodios/core': 10.7.1
   '@zodios/express': 10.4.4
   '@zodios/openapi': 10.4.7
   '@zodios/react': 10.4.0
   axios: 1.2.0
+  dotenv-cli: ^6.0.0
   eslint: 8.28.0
   eslint-config-next: 13.0.5
   eslint-config-prettier: 8.5.0
@@ -24,14 +27,17 @@ specifiers:
   jest: 29.3.1
   jest-environment-jsdom: 29.3.1
   next: 13.0.5
+  prisma: ^4.7.1
   react: 18.2.0
   react-dom: 18.2.0
   swagger-ui-express: 4.6.0
   ts-jest: 29.0.3
   typescript: 4.9.3
+  uuid: ^9.0.0
   zod: 3.19.1
 
 dependencies:
+  '@prisma/client': 4.7.1_prisma@4.7.1
   '@tanstack/react-query': 4.18.0_biqbaboplfbrettd7655fr4n2y
   '@zodios/core': 10.7.1_axios@1.2.0+zod@3.19.1
   '@zodios/express': 10.4.4_mnd2h5kjf463ohegcqqcgi46ju
@@ -39,10 +45,12 @@ dependencies:
   '@zodios/react': 10.4.0_4qt4emltaitlewqsm3twscujkm
   axios: 1.2.0
   next: 13.0.5_672uxklweod7ene3nqtsh262ca
+  prisma: 4.7.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   swagger-ui-express: 4.6.0_express@4.18.2
   typescript: 4.9.3
+  uuid: 9.0.0
   zod: 3.19.1
 
 devDependencies:
@@ -54,6 +62,8 @@ devDependencies:
   '@types/react-dom': 18.0.9
   '@types/swagger-ui-express': 4.1.3
   '@types/testing-library__jest-dom': 5.14.5
+  '@types/uuid': 9.0.0
+  dotenv-cli: 6.0.0
   eslint: 8.28.0
   eslint-config-next: 13.0.5_hsf322ms6xhhd4b5ne6lb74y4a
   eslint-config-prettier: 8.5.0_eslint@8.28.0
@@ -860,6 +870,29 @@ packages:
       tslib: 2.4.1
     dev: true
 
+  /@prisma/client/4.7.1_prisma@4.7.1:
+    resolution: {integrity: sha512-/GbnOwIPtjiveZNUzGXOdp7RxTEkHL4DZP3vBaFNadfr6Sf0RshU5EULFzVaSi9i9PIK9PYd+1Rn7z2B2npb9w==}
+    engines: {node: '>=14.17'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 4.7.1-1.272861e07ab64f234d3ffc4094e32bd61775599c
+      prisma: 4.7.1
+    dev: false
+
+  /@prisma/engines-version/4.7.1-1.272861e07ab64f234d3ffc4094e32bd61775599c:
+    resolution: {integrity: sha512-Bd4LZ+WAnUHOq31e9X/ihi5zPlr4SzTRwUZZYxvWOxlerIZ7HJlVa9zXpuKTKLpI9O1l8Ec4OYCKsivWCs5a3Q==}
+    dev: false
+
+  /@prisma/engines/4.7.1:
+    resolution: {integrity: sha512-zWabHosTdLpXXlMefHmnouhXMoTB1+SCbUU3t4FCmdrtIOZcarPKU3Alto7gm/pZ9vHlGOXHCfVZ1G7OIrSbog==}
+    requiresBuild: true
+    dev: false
+
   /@rushstack/eslint-patch/1.2.0:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
@@ -1136,6 +1169,10 @@ packages:
 
   /@types/tough-cookie/4.0.2:
     resolution: {integrity: sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw==}
+    dev: true
+
+  /@types/uuid/9.0.0:
+    resolution: {integrity: sha512-kr90f+ERiQtKWMz5rP32ltJ/BtULDI5RVO0uavn1HQUOwjx0R1h0rnDYNL0CepF1zL5bSY6FISAfd9tOdDhU5Q==}
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -1944,6 +1981,26 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       webidl-conversions: 7.0.0
+    dev: true
+
+  /dotenv-cli/6.0.0:
+    resolution: {integrity: sha512-qXlCOi3UMDhCWFKe0yq5sg3X+pJAz+RQDiFN38AMSbUrnY3uZshSfDJUAge951OS7J9gwLZGfsBlWRSOYz/TRg==}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+      dotenv: 16.0.3
+      dotenv-expand: 8.0.3
+      minimist: 1.2.7
+    dev: true
+
+  /dotenv-expand/8.0.3:
+    resolution: {integrity: sha512-SErOMvge0ZUyWd5B0NXMQlDkN+8r+HhVUsxgOO7IoPDOdDRD2JjExpN6y3KnFR66jsJMwSn1pqIivhU5rcJiNg==}
+    engines: {node: '>=12'}
+    dev: true
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
     dev: true
 
   /ee-first/1.1.1:
@@ -4278,6 +4335,15 @@ packages:
       react-is: 18.2.0
     dev: true
 
+  /prisma/4.7.1:
+    resolution: {integrity: sha512-CCQP+m+1qZOGIZlvnL6T3ZwaU0LAleIHYFPN9tFSzjs/KL6vH9rlYbGOkTuG9Q1s6Ki5D0LJlYlW18Z9EBUpGg==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 4.7.1
+    dev: false
+
   /prompts/2.4.2:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
     engines: {node: '>= 6'}
@@ -4977,6 +5043,11 @@ packages:
   /utils-merge/1.0.1:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
+    dev: false
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
     dev: false
 
   /v8-to-istanbul/9.0.1:

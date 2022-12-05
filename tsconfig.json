@@ -5,6 +5,10 @@
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true,
 		"esModuleInterop": true,
@@ -16,6 +20,11 @@
 		"incremental": true,
 		"baseUrl": ".",
 		"paths": {
+			"@/AuthServer/*": ["src/server/auth/*"],
+			"@/TransactionsServer/*": ["src/server/transactions/*"],
+			"@/SharedServer/*": ["src/server/shared/*"],
+			"@/UsersServer/*": ["src/server/users/*"],
+			"@/Server/*": ["src/server/*"],
 			"@/*": ["*"]
 		}
 	},
