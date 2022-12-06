@@ -2,9 +2,8 @@ import { Prisma, PrismaClient } from '@prisma/client';
 
 export interface Database extends Prisma.TransactionClient {}
 
-const prisma = new PrismaClient();
-
 export function UnitOfWork() {
+	const prisma = new PrismaClient();
 	let db: Database;
 
 	return {
@@ -16,11 +15,10 @@ export function UnitOfWork() {
 					db = tx;
 					return await fn(db);
 				});
-
 				return result;
 			} catch (error) {
 				console.error(error);
-				// await prisma.$disconnect();
+				await prisma.$disconnect();
 
 				process.exit(1);
 			} finally {

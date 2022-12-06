@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { makeApiWithDocs } from '@/SharedServer/infrastructure/utils/endpointHelpers';
-import { User, UserCreate } from '@/UsersServer/infrastructure/schemas';
+import { UserCreate, UserEndpoint } from '@/UsersServer/infrastructure/schemas';
 
 export const userEndpoints = makeApiWithDocs([
 	{
@@ -12,7 +12,7 @@ export const userEndpoints = makeApiWithDocs([
 		requestFormat: 'json',
 		immutable: false,
 		parameters: [{ name: 'UserCreate', schema: UserCreate, type: 'Body' }],
-		response: User,
+		response: UserEndpoint,
 		status: 200,
 		responseDescription: 'new user created successfully',
 		errors: [

@@ -1,3 +1,3 @@
-import { initApp } from '@/Server/app';
+import { app } from '@/Server/app';
 
-export default initApp();
+export default app;

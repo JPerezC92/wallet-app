@@ -1,6 +1,9 @@
-import { openApiBuilder } from '@zodios/openapi';
+import { bearerAuthScheme, openApiBuilder } from '@zodios/openapi';
 
-import { ApiDefinitions } from '@/SharedServer/infrastructure/utils/endpointHelpers';
+import {
+	PrivateApiDefinitions,
+	PublicApiDefinitions,
+} from '@/SharedServer/infrastructure/utils/endpointHelpers';
 
 export const OpenApiDocsGenerate = () =>
 	openApiBuilder({
@@ -9,5 +12,7 @@ export const OpenApiDocsGenerate = () =>
 		description: 'A simple API',
 	})
 		.addServer({ url: '/api/v1', description: 'wallet api' })
-		.addPublicApi(ApiDefinitions.getAll())
+		.addPublicApi(PublicApiDefinitions.getAll())
+		.addSecurityScheme('BearerAuth', bearerAuthScheme())
+		.addProtectedApi('BearerAuth', PrivateApiDefinitions.getAll())
 		.build();

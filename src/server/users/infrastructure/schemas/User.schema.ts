@@ -1,14 +1,12 @@
 import { z } from 'zod';
 
-export const User = z.object({
+export const UserEndpoint = z.object({
 	id: z.string().min(1),
 	firstName: z.string().min(1),
 	lastName: z.string().min(1),
 	email: z.string().min(1),
-	points: z.number(),
-	roleId: z.number().min(1),
-	updatedAt: z.string(),
-	createdAt: z.string(),
+	updatedAt: z.date(),
+	createdAt: z.date(),
 });
 
-export type User = z.infer<typeof User>;
+export type UserEndpoint = z.infer<typeof UserEndpoint>;

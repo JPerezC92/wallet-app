@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { makeApiWithDocs } from '@/SharedServer/infrastructure/utils/endpointHelpers';
 import { NotFound } from '@/SharedServer/infrastructure/schemas/NotFound.schema';
+import { makeApiWithDocs } from '@/SharedServer/infrastructure/utils/endpointHelpers';
 import { TransactionSchema } from '@/TransactionsServer/infrastructure/schemas';
 
 export const transactionsEndpoints = makeApiWithDocs([

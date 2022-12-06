@@ -11,6 +11,3 @@ export function UserPersistenceToModel(userStored: UserStored): User {
 		userStored.password
 	);
 }
-export function UserModelToPersistence(userStored: User): UserStored {
-	return { ...userStored };
-}
