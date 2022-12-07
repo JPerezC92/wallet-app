@@ -14,6 +14,7 @@ const zodiosHooks = new ZodiosHooks('wallet_api', zodios, {
 
 export default function Home() {
 	const { data } = zodiosHooks.useGetFrameworks();
+	console.log(`🚀 ~ file: index.tsx:17 ~ Home ~ data`, data);
 
 	return (
 		<div className={styles.container}>
