@@ -3,9 +3,11 @@
 	"configurations": [
 		{
 			"name": "Next.js: debug server-side",
-			"type": "node-terminal",
+			"type": "node",
 			"request": "launch",
-			"command": "pnpm dev:debug"
+			// "command": "pnpm dev:debug",
+			"autoAttachChildProcesses": true
+			// "port": 3000
 		},
 		{
 			"name": "Next.js: debug client-side",

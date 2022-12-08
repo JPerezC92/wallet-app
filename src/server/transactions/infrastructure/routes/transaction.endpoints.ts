@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { NotFound } from '@/SharedServer/infrastructure/schemas/NotFound.schema';
+import { ErrorResponse } from '@/SharedServer/infrastructure/schemas';
 import { makeApiWithDocs } from '@/SharedServer/infrastructure/utils/endpointHelpers';
 import { TransactionSchema } from '@/TransactionsServer/infrastructure/schemas';
 
@@ -23,7 +23,7 @@ export const transactionsEndpoints = makeApiWithDocs([
 			{
 				status: 404,
 				description: 'transaction not found',
-				schema: NotFound,
+				schema: ErrorResponse,
 			},
 		],
 	},

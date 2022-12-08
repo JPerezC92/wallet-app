@@ -1,13 +1,9 @@
 export abstract class DomainError extends Error {
-	abstract readonly code: string;
+	public abstract readonly code: string;
+	public abstract readonly name: string;
+	public abstract readonly message: string;
 
-	constructor(message: string) {
-		super(message);
+	public static isDomainError(error: unknown): error is DomainError {
+		return error instanceof DomainError;
 	}
 }
-
-// class UserNotFound extends DomainError {
-// 	constructor() {
-// 		super();
-// 	}
-// }

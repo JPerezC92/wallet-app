@@ -1,27 +1,33 @@
-import { AuthAccessPayload, TokenEncoder } from '@/AuthServer/domain';
+import {
+	AuthAccessPayload,
+	AuthTokenWasNotProvided,
+	TokenCipher,
+} from '@/AuthServer/domain';
 import { Adapter, UseCase } from '@/SharedServer/domain';
-import { User, UsersRepository } from '@/UsersServer/domain';
+import { User, UserNotFound, UsersRepository } from '@/UsersServer/domain';
 
 interface AuthSearchUserInfoProps {
-	accessToken: string;
+	accessToken?: string;
 }
 
-export const AuthSearchUserInfo: <T>(
+export const AuthSearchUserInfo: <Result>(
 	userRepo: UsersRepository,
-	tokenEncoder: TokenEncoder<AuthAccessPayload>,
-	userAdapter: Adapter<User, T>
-) => UseCase<Promise<T>, AuthSearchUserInfoProps> = (
+	tokenEncoder: TokenCipher<AuthAccessPayload>,
+	userAdapter: Adapter<User, Result>
+) => UseCase<Promise<Result>, AuthSearchUserInfoProps> = (
 	_usersRepo,
 	_tokenEncoder,
 	userAdapter
 ) => {
 	return {
 		execute: async ({ accessToken }) => {
+			if (!accessToken) throw new AuthTokenWasNotProvided();
+
 			const { email } = _tokenEncoder.decode(accessToken);
 
 			const user = await _usersRepo.findByEmail(email);
 
-			if (!user) throw new Error('not founnd');
+			if (!user) throw new UserNotFound();
 
 			return userAdapter(user);
 		},

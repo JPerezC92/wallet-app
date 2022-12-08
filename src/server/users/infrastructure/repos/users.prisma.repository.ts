@@ -11,7 +11,7 @@ export const UsersPrismaRepository: Repository<UsersRepository> = (db) => {
 					firstName: user.firstName,
 					lastName: user.lastName,
 					email: user.email,
-					password: '123456',
+					password: user.password,
 				},
 			});
 			return UserPersistenceToModel(newUser);

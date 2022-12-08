@@ -21,6 +21,7 @@
 		"@zodios/react": "10.4.0",
 		"axios": "1.2.0",
 		"bcrypt": "^5.1.0",
+		"http-status-codes": "^2.2.0",
 		"jsonwebtoken": "^8.5.1",
 		"next": "13.0.5",
 		"prisma": "^4.7.1",
