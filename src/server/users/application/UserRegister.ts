@@ -1,21 +1,23 @@
-import { PasswordEncryptor } from '@/AuthServer/domain/PasswordEncryptor';
+import { PasswordCipher } from '@/AuthServer/domain';
 import { Adapter, UseCase, UuidGenerator } from '@/SharedServer/domain';
-import { User, UsersRepository } from '@/UsersServer/domain';
+import {
+	User,
+	UserAlreadyRegistered,
+	UsersRepository,
+} from '@/UsersServer/domain';
 
 type UserRegisterInput = Pick<
 	User,
 	'firstName' | 'lastName' | 'email' | 'password'
 >;
 
-class DivideByZero extends Error {}
-
 /**
- * @throws {DivideByZero} Argument x must be non-zero.
+ * @throws { UserAlreadyRegistered }.
  */
 export const UserRegister: <AdapterReturn>(
 	usersRepo: UsersRepository,
 	uuidGenerator: UuidGenerator,
-	passwordEncryptor: PasswordEncryptor,
+	passwordEncryptor: PasswordCipher,
 	userAdapter: Adapter<User, AdapterReturn>
 ) => UseCase<Promise<AdapterReturn>, UserRegisterInput> = (
 	_usersRepo,
@@ -27,11 +29,9 @@ export const UserRegister: <AdapterReturn>(
 		execute: async ({ email, firstName, lastName, password }) => {
 			const userAlreadyRegistered = await _usersRepo.findByEmail(email);
 
-			if (userAlreadyRegistered) {
-				throw new Error('User already registered');
-			}
+			if (userAlreadyRegistered) throw new UserAlreadyRegistered();
 
-			const user = new User(
+			const user = User.newUser(
 				_uuidGenerator.generate(),
 				firstName,
 				lastName,

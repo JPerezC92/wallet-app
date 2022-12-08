@@ -1,8 +1,8 @@
 import Bcrypt from 'bcrypt';
 
-import { PasswordEncryptor } from '@/AuthServer/domain';
+import { PasswordCipher } from '@/AuthServer/domain';
 
-export const BcryptPasswordEncryptor: () => PasswordEncryptor = () => {
+export const BcryptPasswordCipher: () => PasswordCipher = () => {
 	const rounds = 10;
 
 	return {

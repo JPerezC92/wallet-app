@@ -15,6 +15,7 @@ export function UnitOfWork() {
 					db = tx;
 					return await fn(db);
 				});
+
 				return result;
 			} catch (error) {
 				console.error(error);

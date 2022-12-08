@@ -1,2 +1,2 @@
-export * from './AuthAccessToken.encoder';
-export * from './BcryptPasswordEncryptor';
+export * from './AuthAccessToken.cipher';
+export * from './BcryptPassword.cipher';

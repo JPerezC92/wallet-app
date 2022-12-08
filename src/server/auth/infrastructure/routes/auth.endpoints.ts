@@ -1,13 +1,14 @@
-import { z } from 'zod';
-
-import { NotFound } from '@/SharedServer/infrastructure/schemas/NotFound.schema';
+import {
+	AuthLoginResponse,
+	Credentials,
+} from '@/AuthServer/infrastructure/schemas';
+import { ErrorResponse } from '@/SharedServer/infrastructure/schemas';
 import {
 	makeEndpointPrivateWithDocs,
 	makeEndpointWithDocs,
 } from '@/SharedServer/infrastructure/utils/endpointHelpers';
 import { UserEndpoint } from '@/UsersServer/infrastructure/schemas';
 
-// type Mutable<T> = ReadonlyArray<T>;
 export const authEndpoints = [
 	makeEndpointWithDocs({
 		method: 'post',
@@ -17,19 +18,21 @@ export const authEndpoints = [
 		requestFormat: 'json',
 		status: 200,
 		protected: true,
+		response: AuthLoginResponse,
 		parameters: [
 			{
 				name: 'credentials',
 				type: 'Body',
-				schema: z.object({
-					email: z.string(),
-					password: z.string(),
-				}),
+				schema: Credentials,
 			},
 		],
-		response: z.object({
-			accessToken: z.string(),
-		}),
+		errors: [
+			{
+				status: 401,
+				description: 'Invalid Credentials',
+				schema: ErrorResponse,
+			},
+		],
 	}),
 	makeEndpointPrivateWithDocs({
 		method: 'get',
@@ -37,11 +40,21 @@ export const authEndpoints = [
 		alias: 'userInfo',
 		description: 'obtain user info',
 		response: UserEndpoint,
-		error: [
+		errors: [
+			{
+				status: 400,
+				description: 'Token not found',
+				schema: ErrorResponse,
+			},
+			{
+				status: 401,
+				description: 'Invalid token',
+				schema: ErrorResponse,
+			},
 			{
 				status: 404,
-				description: 'user not found',
-				schema: NotFound,
+				description: 'User not found',
+				schema: ErrorResponse,
 			},
 		],
 	}),

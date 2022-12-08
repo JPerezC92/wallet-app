@@ -1,3 +1,5 @@
 export * from './AuthAccessPayload';
-export * from './PasswordEncryptor';
-export * from './TokenEncoder';
+export * from './AuthTokenInvalid';
+export * from './AuthTokenWasNotProvided';
+export * from './PasswordCipher';
+export * from './TokenCipher';
