@@ -8,6 +8,8 @@ export function UserPersistenceToModel(userStored: UserStored): User {
 		userStored.firstName,
 		userStored.lastName,
 		userStored.email,
-		userStored.password
+		userStored.password,
+		userStored.createdAt,
+		userStored.updatedAt
 	);
 }
