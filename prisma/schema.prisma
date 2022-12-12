@@ -12,26 +12,51 @@ datasource db {
 }
 
 model UserStored {
-  id                String              @id @default(uuid())
-  email             String              @unique
-  firstName         String
-  lastName          String
-  password          String
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @default(now())
-  TransactionStored TransactionStored[]
+  id            String          @id @default(uuid())
+  email         String          @unique
+  firstName     String
+  lastName      String
+  password      String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @default(now())
+  AccountStored AccountStored[]
 
   @@map("User")
 }
 
+model AccountStored {
+  id                String              @id @default(uuid())
+  money             BigInt              @default(0)
+  user              UserStored          @relation(fields: userId, references: [id])
+  userId            String
+  currency          Currency            @relation(fields: currencyValue, references: [value])
+  currencyValue     String
+  TransactionStored TransactionStored[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @default(now())
+
+  @@index([userId])
+  @@index([currencyValue])
+  @@map("Account")
+}
+
+model Currency {
+  value String @id @unique
+
+  AccountStored AccountStored[]
+}
+
 model TransactionStored {
-  id          String     @id @default(uuid())
+  id          String        @id @default(uuid())
   amount      Int
   date        DateTime
   description String
-  userId      String
-  user        UserStored @relation(fields: userId, references: [id])
+  account     AccountStored @relation(fields: accountId, references: [id])
+  accountId   String
 
-  @@index([userId])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  @@index([accountId])
   @@map("Transaction")
 }

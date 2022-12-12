@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Account` MODIFY `money` BIGINT NOT NULL DEFAULT 0;

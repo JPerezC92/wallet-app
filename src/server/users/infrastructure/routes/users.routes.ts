@@ -21,7 +21,7 @@ usersRouter.post('/users', async (req, res) => {
 
 	try {
 		const newUser = await uow.transaction(async (db) => {
-			return await UserRegister(
+			return UserRegister(
 				UsersPrismaRepository(db),
 				UuidJSGenerator(),
 				BcryptPasswordCipher(),

@@ -10,6 +10,11 @@ interface AuthSearchUserInfoProps {
 	accessToken?: string;
 }
 
+/**
+ * @throws { AuthTokenInvalid }
+ * @throws { AuthTokenWasNotProvided }
+ * @throws { UserNotFound }
+ */
 export const AuthSearchUserInfo: <Result>(
 	userRepo: UsersRepository,
 	tokenEncoder: TokenCipher<AuthAccessPayload>,
