@@ -25,7 +25,7 @@ authRouter.post('/auth/login', async (req, res) => {
 
 	try {
 		const accessToken = await uow.transaction(async (db) => {
-			return await AuthLogin(
+			return AuthLogin(
 				BcryptPasswordCipher(),
 				AuthAccessTokenCipher(),
 				UsersPrismaRepository(db)
@@ -37,18 +37,18 @@ authRouter.post('/auth/login', async (req, res) => {
 		const errorResponse = ExceptionListener([
 			[UserInvalidCredentials.name, BadRequest],
 		]).mapError(error);
+
 		return res.status(errorResponse.statusCode).json(errorResponse.response());
 	}
 });
 
 authRouter.get('/auth/me', async (req, res) => {
 	const accessToken = req.headers.authorization;
-
 	const uow = UnitOfWork();
 
 	try {
 		const user = await uow.transaction(async (db) => {
-			return await AuthSearchUserInfo(
+			return AuthSearchUserInfo(
 				UsersPrismaRepository(db),
 				AuthAccessTokenCipher(),
 				UserModelToEndpoint

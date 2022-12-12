@@ -31,13 +31,13 @@ export const UserRegister: <AdapterReturn>(
 
 			if (userAlreadyRegistered) throw new UserAlreadyRegistered();
 
-			const user = User.newUser(
-				_uuidGenerator.generate(),
+			const user = User.newUser({
+				id: _uuidGenerator.generate(),
 				firstName,
 				lastName,
 				email,
-				await _passwordEncryptor.encrypt(password)
-			);
+				password: await _passwordEncryptor.encrypt(password),
+			});
 
 			await _usersRepo.register(user);
 

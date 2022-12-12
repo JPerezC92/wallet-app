@@ -12,6 +12,9 @@ import {
 
 type AuthLoginProps = Pick<User, 'email' | 'password'>;
 
+/**
+ * @throws { UserInvalidCredentials }.
+ */
 export const AuthLogin: (
 	passwordCipher: PasswordCipher,
 	tokenCipher: TokenCipher<AuthAccessPayload>,
