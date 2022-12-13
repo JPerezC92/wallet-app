@@ -20,6 +20,7 @@ export function ExceptionListener(exceptionList: ExceptionMapping) {
 		const _exceptionList = new Map(exceptionList);
 
 		if (!DomainError.isDomainError(error)) {
+			console.log(error);
 			return new InternalServerError();
 		}
 

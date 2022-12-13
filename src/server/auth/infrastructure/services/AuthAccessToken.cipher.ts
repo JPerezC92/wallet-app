@@ -5,7 +5,7 @@ import {
 	AuthTokenInvalid,
 	TokenCipher,
 } from '@/AuthServer/domain';
-import { parseBearerToken } from '@/AuthServer/utils';
+import { parseBearerToken } from '@/AuthServer/infrastructure/utils';
 import { EnvVars } from '@/SharedServer/infrastructure/utils/envVars';
 
 export const AuthAccessTokenCipher: () => TokenCipher<AuthAccessPayload> =
@@ -20,8 +20,10 @@ export const AuthAccessTokenCipher: () => TokenCipher<AuthAccessPayload> =
 
 				return token;
 			},
-
-			decode: (token) => {
+			/**
+			 * @throws { AuthTokenInvalid }
+			 */
+			decode: (token): AuthAccessPayload => {
 				try {
 					const tokenParsed = parseBearerToken(token);
 					const payload = jwt.verify(
