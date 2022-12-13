@@ -5,6 +5,7 @@ import {
 	AuthAccessTokenCipher,
 	BcryptPasswordCipher,
 } from '@/AuthServer/infrastructure/services';
+import { DecodeToken } from '@/AuthServer/infrastructure/utils';
 import { ctx } from '@/Server/context';
 import { UnitOfWork } from '@/Server/db/UnitOfWork';
 import {
@@ -50,9 +51,8 @@ authRouter.get('/auth/me', async (req, res) => {
 		const user = await uow.transaction(async (db) => {
 			return AuthSearchUserInfo(
 				UsersPrismaRepository(db),
-				AuthAccessTokenCipher(),
 				UserModelToEndpoint
-			).execute({ accessToken });
+			).execute({ email: DecodeToken(accessToken).email });
 		});
 
 		return res.status(200).json(user);
